@@ -26,6 +26,7 @@ from torchvision import transforms
 import h5py
 import pandas as pd
 from PIL import Image
+from rich.progress import track
 
 import ai8x
 
@@ -371,7 +372,7 @@ class SVHN(Dataset):
 
         info_df = pd.DataFrame()
 
-        for j in range(f['/digitStruct/bbox'].shape[0]):
+        for j in track(range(f['/digitStruct/bbox'].shape[0]), "Parsing .mat file..."):
             img_name = SVHN.get_name(j, f)
             row_dict = SVHN.get_bbox(j, f)
 
